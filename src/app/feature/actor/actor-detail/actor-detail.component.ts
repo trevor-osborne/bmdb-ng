@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Actor } from 'src/app/model/actor.class';
 import { ActorService } from 'src/app/service/actor.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Credit } from 'src/app/model/credit.class';
+import { CreditService } from 'src/app/service/credit.service';
 
 @Component({
   selector: 'app-actor-detail',
@@ -13,8 +15,10 @@ export class ActorDetailComponent implements OnInit {
   title: string = "Actor-Detail";
   id: number = 0;
   actorId: number = 0;
+  credits: Credit[] = [];
 
   constructor(private actorSvc: ActorService,
+              private creditSvc: CreditService,
               private router: Router,
               private route: ActivatedRoute) { }
 
@@ -23,6 +27,11 @@ export class ActorDetailComponent implements OnInit {
     this.actorSvc.get(this.actorId).subscribe(jr => {
       this.actor = jr.data as Actor;
       console.log("Actor Found! ", this.actor);
+    });
+    this.creditSvc.getAllByActorId(this.actorId).subscribe(
+      jr => {
+        this.credits = jr.data as Credit[];
+        console.log(this.credits);
     });
   }
 

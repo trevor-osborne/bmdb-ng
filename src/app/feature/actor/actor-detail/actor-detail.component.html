@@ -31,4 +31,20 @@
         <span><a routerLink="/actor/edit/{{actor.id}}" class="btn btn-sm btn-warning">Edit</a></span>
         <span> | <button (click)="delete()" class="btn btn-sm btn-danger">Delete</button></span>
     </span>
+    <br><br>
+    <section class="heading">
+        <span class="page-title font-weight-bold font-italic">Filmogrophy</span>
+    </section>
+    <table class="table table-sm">
+        <tr>
+            <td class="font-weight-bold">ID</td>
+            <td class="font-weight-bold">Movie</td>
+            <td class="font-weight-bold">Role</td>
+        </tr>
+        <tr *ngFor="let credit of credits">
+            <td>{{ credit.id }}</td>
+            <td><a routerLink="/movie/detail/{{credit.movie.id}}">{{ credit.movie.title }}</a></td>
+            <td>{{ credit.role }}</td>
+        </tr>
+    </table>
 </div>
